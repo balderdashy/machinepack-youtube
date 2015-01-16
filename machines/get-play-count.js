@@ -1,5 +1,5 @@
 module.exports = {
-  friendlyName: 'Get video count',
+  friendlyName: 'Get play count',
   description: 'Display the number of views of a Youtube Video.',
   extendedDescription: '',
   inputs: {
