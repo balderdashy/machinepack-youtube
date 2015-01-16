@@ -23,7 +23,6 @@
     "friendlyName": "Youtube",
     "machineDir": "machines/",
     "machines": [
-      "say-hello",
       "get-video-count"
     ]
   }
