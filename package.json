@@ -1,0 +1,30 @@
+{
+  "name": "machinepack-youtube",
+  "version": "0.1.0",
+  "description": "Communicate with the Youtube API to get video views, etc.",
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha -b"
+  },
+  "keywords": [
+    "Youtube",
+    "machines",
+    "machinepack"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "machine": "^1.1.0",
+    "request": "^2.51.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0"
+  },
+  "machinepack": {
+    "friendlyName": "Youtube",
+    "machineDir": "machines/",
+    "machines": [
+      "say-hello",
+      "get-video-count"
+    ]
+  }
+}
