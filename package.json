@@ -14,7 +14,8 @@
   "license": "MIT",
   "dependencies": {
     "machine": "^1.1.0",
-    "request": "^2.51.0"
+    "machinepack-http": "^0.2.3",
+    "lodash": "^2.4.1"
   },
   "devDependencies": {
     "mocha": "^2.1.0"
@@ -23,8 +24,7 @@
     "friendlyName": "Youtube",
     "machineDir": "machines/",
     "machines": [
-      "say-hello",
-      "get-video-count"
+      "get-play-count"
     ]
   }
 }
