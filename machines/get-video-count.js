@@ -21,7 +21,7 @@ module.exports = {
     },
     rateLimitExceeded: {
       description: 'The rate limit has been exceeded.',
-    }
+    },
     success: { 
       description: 'Returns statistical data about the Video', 
       example: {
