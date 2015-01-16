@@ -19,6 +19,9 @@ module.exports = {
     error: { 
       description: 'Unexpected error occurred.' 
     },
+    rateLimitExceeded: {
+      description: 'The rate limit has been exceeded.',
+    }
     success: { 
       description: 'Returns statistical data about the Video', 
       example: {
@@ -46,12 +49,17 @@ module.exports = {
     // Make a request to the Google Youtube API
     Request(BASE_URL+Video_id+Access_key, function(err, response, httpBody) {
 
+      // Check rate for limit
+      if (response.statusCode === '403' || '') {
+        returns exits.rateLimitExceeded("Your rate limit has been exceeded.");
+      }
+
       // Parse the httpBody
       try{
       var responseBody = JSON.parse(httpBody);
       }
       catch(e) {
-        return exits.error('Not JSON');
+        return exits.error('An error occurred while parsing httpBody');
       }
 
       // Return only the viewCount and likeCount
