@@ -57,9 +57,9 @@ module.exports = {
       // OK.
       success: function(result) {
 
-
+        var responseBody;
         try {
-          var responseBody = JSON.parse(result.body);
+          responseBody = JSON.parse(result.body);
         } catch (e) {
           return exits.error('An error occurred while parsing the body.');
         }
