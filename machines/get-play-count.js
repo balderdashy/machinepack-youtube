@@ -22,6 +22,9 @@ module.exports = {
     rateLimitExceeded: {
       description: 'The rate limit has been exceeded.',
     },
+    invalidUrl: {
+      description: 'Unable to parse a video id from the provided YouTube URL.'
+    },
     success: {
       description: 'Returns statistical data about the Video',
       example: {
@@ -41,12 +44,20 @@ module.exports = {
     // The Youtube API URL setup
     var BASE_URL = 'https://www.googleapis.com';
 
+    var videoId;
+    try {
+      videoId = QS.parse(URL.parse(inputs.url).query).v;
+    }
+    catch (e) {
+      return exits.invalidUrl(e);
+    }
+
     Http.sendHttpRequest({
       baseUrl: BASE_URL,
       url:
       '/youtube/v3/videos?part=contentDetails,statistics&'+
       // Get the id of the video from the URL
-      'id='+QS.parse(URL.parse(inputs.url).query).v+
+      'id='+videoId+
       '&key=' + inputs.appId,
       method: 'get',
     }).exec({
