@@ -32,6 +32,7 @@ module.exports = {
   },
   fn: function(inputs, exits) {
 
+    var util = require('util');
     var URL = require('url');
     var QS = require('querystring');
     var _ = require('lodash');
@@ -65,7 +66,7 @@ module.exports = {
             likeCount: responseBody.items[0].statistics.likeCount
           };
         } catch (e) {
-          return exits.error('Unexpected response from YouTube API.');
+          return exits.error('Unexpected response from YouTube API:\n'+util.inspect(responseBody, false, null)+'\nParse error:\n'+util.inspect(e));
         }
 
         return exits.success();
@@ -75,31 +76,23 @@ module.exports = {
       notOk: function(result) {
 
         try {
-          if (result.status === 403 && _.any(parsedBody.error.errors, {
+          var responseBody = JSON.parse(result.body);
+          if (result.status === 403 && _.any(responseBody.error.errors, {
               reason: 'rateLimitExceeded'
             })) {
             return exits.rateLimitExceeded();
           }
+          // Unknown youtube error
+          return exits.error(result);
         } catch (e) {
-          return exits.error(e);
+          return exits.error('Unexpected response from YouTube API:\n'+util.inspect(responseBody, false, null)+'\nParse error:\n'+util.inspect(e));
         }
-
-        try {
-          var responseBody = JSON.parse(result.body);
-        } catch (e) {
-          return exits.error('An error occurred while parsing the body.');
-        }
-
-        return exits.error(err);
 
       },
       // An unexpected error occurred.
       error: function(err) {
-
         return exits.error(err);
-
-
-      },
+      }
     });
 
   },
