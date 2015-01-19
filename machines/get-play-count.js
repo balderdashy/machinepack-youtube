@@ -61,7 +61,7 @@ module.exports = {
         try {
           responseBody = JSON.parse(result.body);
         } catch (e) {
-          return exits.error('An error occurred while parsing the body.');
+          return exits.error('Unexpected response from YouTube API.');
         }
 
         return exits.success({
