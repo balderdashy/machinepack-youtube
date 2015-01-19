@@ -10,7 +10,7 @@ module.exports = {
     },
     apiKey: {
       example: 'xAmBxAmBxAmBkjbyKkjbyKkjbyK',
-      description: 'The public Google API key for this application.',
+      description: 'The private Google API key for this application.',
       required: true,
       whereToGet: {
         url: 'https://console.developers.google.com/project/hip-cycling-830/apiui/credential',
