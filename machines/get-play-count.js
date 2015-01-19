@@ -60,14 +60,15 @@ module.exports = {
         var responseBody;
         try {
           responseBody = JSON.parse(result.body);
+          responseBody = {
+            viewCount: responseBody.items[0].statistics.viewCount,
+            likeCount: responseBody.items[0].statistics.likeCount
+          };
         } catch (e) {
           return exits.error('Unexpected response from YouTube API.');
         }
 
-        return exits.success({
-          viewCount: responseBody.items[0].statistics.viewCount,
-          likeCount: responseBody.items[0].statistics.likeCount
-        });
+        return exits.success();
 
       },
       // Non-2xx status code returned from server
