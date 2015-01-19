@@ -11,7 +11,12 @@ module.exports = {
     appId: {
       example: 'xAmBxAmBxAmBkjbyKkjbyKkjbyK',
       description: 'The public Google API key for this application.',
-      required: true
+      required: true,
+      whereToGet: {
+        url: 'https://console.developers.google.com/project/hip-cycling-830/apiui/credential',
+        description: 'Copy and paste an API key, or create one if you haven\'t already.',
+        extendedDescription: 'If the key type you need does not already exist, create an API key by selecting Create New Key and then selecting "Server API Key". Then enter the additional data required for that key type.  Also make sure the YouTube API is enabled here: https://console.developers.google.com/project/hip-cycling-830/apiui/apiview/youtube'
+      }
     }
   },
   defaultExit: 'success',
