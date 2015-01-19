@@ -38,21 +38,16 @@ module.exports = {
     var _ = require('lodash');
     var Http = require('machinepack-http');
 
-
     // The Youtube API URL setup
     var BASE_URL = 'https://www.googleapis.com';
 
-    // Get the id of the video from the URL
-    var Video_id = QS.parse(URL.parse(inputs.url).query).v;
-
-    // Build up the necessary Access Key
-    var Access_key = '&key=' + inputs.appId;
-
-    baseUrl = BASE_URL + Video_id + Access_key;
-
     Http.sendHttpRequest({
-      baseUrl: baseUrl,
-      url: '/youtube/v3/videos?part=contentDetails,statistics&id=',
+      baseUrl: BASE_URL,
+      url:
+      '/youtube/v3/videos?part=contentDetails,statistics&'+
+      // Get the id of the video from the URL
+      'id='+QS.parse(URL.parse(inputs.url).query).v+
+      '&key=' + inputs.appId,
       method: 'get',
     }).exec({
       // OK.
