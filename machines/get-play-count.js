@@ -39,7 +39,7 @@ module.exports = {
 
 
     // The Youtube API URL setup
-    var BASE_URL = 'https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics&id='
+    var BASE_URL = 'https://www.googleapis.com';
 
     // Get the id of the video from the URL
     var Video_id = QS.parse(URL.parse(inputs.url).query).v;
@@ -51,11 +51,12 @@ module.exports = {
 
     Http.sendHttpRequest({
       baseUrl: baseUrl,
-      url: '',
+      url: '/youtube/v3/videos?part=contentDetails,statistics&id=',
       method: 'get',
     }).exec({
       // OK.
       success: function(result) {
+
 
         try {
           var responseBody = JSON.parse(result.body);
