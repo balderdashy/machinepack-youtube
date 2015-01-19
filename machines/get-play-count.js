@@ -8,7 +8,7 @@ module.exports = {
       description: 'The URL of a Youtube Video.',
       required: true
     },
-    appId: {
+    apiKey: {
       example: 'xAmBxAmBxAmBkjbyKkjbyKkjbyK',
       description: 'The public Google API key for this application.',
       required: true,
@@ -64,7 +64,7 @@ module.exports = {
       '/youtube/v3/videos?part=contentDetails,statistics&'+
       // Get the id of the video from the URL
       'id='+videoId+
-      '&key=' + inputs.appId,
+      '&key=' + inputs.apiKey,
       method: 'get',
     }).exec({
       // OK.
