@@ -31,10 +31,11 @@ module.exports = {
       description: 'Unable to parse a video id from the provided YouTube URL.'
     },
     success: {
-      description: 'Returns statistical data about the Video',
+      description: 'Returns statistics about the video',
+      extendedDescription: 'Counts are reflected as strings to prevent integer overflow issues.',
       example: {
-        viewCount: "19255096",
-        likeCount: "116321"
+        viewCount: '19255096',
+        likeCount: '116321'
       }
     }
   },
@@ -67,12 +68,14 @@ module.exports = {
       method: 'get',
     }).exec({
       // OK.
-      success: function(result) {
+      success: function(httpResponse) {
 
+        // Parse response body and build up result.
         var responseBody;
+        var result;
         try {
-          responseBody = JSON.parse(result.body);
-          responseBody = {
+          responseBody = JSON.parse(httpResponse.body);
+          result = {
             viewCount: responseBody.items[0].statistics.viewCount,
             likeCount: responseBody.items[0].statistics.likeCount
           };
@@ -80,21 +83,21 @@ module.exports = {
           return exits.error('Unexpected response from YouTube API:\n'+util.inspect(responseBody, false, null)+'\nParse error:\n'+util.inspect(e));
         }
 
-        return exits.success();
+        return exits.success(result);
 
       },
       // Non-2xx status code returned from server
-      notOk: function(result) {
+      notOk: function(httpResponse) {
 
         try {
-          var responseBody = JSON.parse(result.body);
-          if (result.status === 403 && _.any(responseBody.error.errors, {
+          var responseBody = JSON.parse(httpResponse.body);
+          if (httpResponse.status === 403 && _.any(responseBody.error.errors, {
               reason: 'rateLimitExceeded'
             })) {
             return exits.rateLimitExceeded();
           }
           // Unknown youtube error
-          return exits.error(result);
+          return exits.error(httpResponse);
         } catch (e) {
           return exits.error('Unexpected response from YouTube API:\n'+util.inspect(responseBody, false, null)+'\nParse error:\n'+util.inspect(e));
         }
