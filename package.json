@@ -17,6 +17,9 @@
     "machinepack-http": "^0.2.3",
     "lodash": "^2.4.1"
   },
+  "repository":{
+    "url":"https://github.com/balderdashy/machinepack-youtube.git"
+  },
   "devDependencies": {
     "mocha": "^2.1.0"
   },
