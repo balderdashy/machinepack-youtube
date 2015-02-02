@@ -1,6 +1,7 @@
 module.exports = {
   friendlyName: 'Get play count',
   description: 'Display the number of views of a Youtube Video.',
+  cacheable: true,
   extendedDescription: '',
   inputs: {
     url: {
