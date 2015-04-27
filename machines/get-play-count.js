@@ -13,6 +13,7 @@ module.exports = {
       example: 'xAmBxAmBxAmBkjbyKkjbyKkjbyK',
       description: 'The private Google API key for this application.',
       required: true,
+      protect: true,
       whereToGet: {
         url: 'https://console.developers.google.com/project/hip-cycling-830/apiui/credential',
         description: 'Copy and paste an API key, or create one if you haven\'t already.',
@@ -43,30 +44,27 @@ module.exports = {
   fn: function(inputs, exits) {
 
     var util = require('util');
-    var URL = require('url');
-    var QS = require('querystring');
     var _ = require('lodash');
+    var Machine = require('machine');
     var Http = require('machinepack-http');
 
     // The Youtube API URL setup
-    var BASE_URL = 'https://www.googleapis.com';
+    var BASE_URL = Machine.build(require('./get-base-url')).execSync();
 
-    var videoId;
-    try {
-      videoId = QS.parse(URL.parse(inputs.url).query).v;
-    }
-    catch (e) {
-      return exits.invalidUrl(e);
-    }
+    // Get the id of the video from the URL
+    var videoId = Machine.build(require('./parse-video-id')).configure({
+      url: inputs.url
+    }).execSync();
 
     Http.sendHttpRequest({
       baseUrl: BASE_URL,
-      url:
-      '/youtube/v3/videos?part=contentDetails,statistics&'+
-      // Get the id of the video from the URL
-      'id='+videoId+
-      '&key=' + inputs.apiKey,
       method: 'get',
+      url: '/videos',
+      params: {
+        part: 'contentDetails,statistics',
+        id: videoId,
+        key: inputs.apiKey
+      }
     }).exec({
       // OK.
       success: function(httpResponse) {

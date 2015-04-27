@@ -13,9 +13,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "machine": "^1.1.0",
-    "machinepack-http": "^0.2.3",
-    "lodash": "^2.4.1"
+    "lodash": "^2.4.1",
+    "machine": "^4.0.5",
+    "machinepack-http": "^2.1.0"
   },
   "repository": {
     "url": "https://github.com/balderdashy/machinepack-youtube.git"
@@ -27,7 +27,9 @@
     "friendlyName": "Youtube",
     "machineDir": "machines/",
     "machines": [
-      "get-play-count"
+      "get-play-count",
+      "parse-video-id",
+      "get-base-url"
     ]
   }
 }
