@@ -57,6 +57,7 @@ module.exports = {
       description: 'Returns an array of video metadata.',
       example: [{
         id: 'INscMGmhmX4',
+        url: 'https://youtube.com/watch?v=INscMGmhmX4',
         title: 'The Original Grumpy Cat',
         description: 'Visit Grumpy Cat\'s Website: www.grumpycats.com New Tshirts at: http://bit.ly/gcteeshirts Twitter @RealGrumpyCat www.twitter.com/RealGrumpyCat Facebook ...',
         publishedAt: '2012-09-25T14:36:51.000Z'
