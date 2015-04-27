@@ -29,7 +29,8 @@
     "machines": [
       "get-play-count",
       "parse-video-id",
-      "get-base-url"
+      "get-base-url",
+      "search-videos"
     ]
   }
 }
