@@ -101,7 +101,6 @@ module.exports = {
 
       // An unexpected error occurred.
       error: function(err) {
-        console.log(err);
 
         try {
           var responseBody = JSON.parse(err.output.body);
