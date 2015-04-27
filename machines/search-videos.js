@@ -113,6 +113,7 @@ module.exports = {
             }
             memo.push({
               id: video.id.videoId,
+              url: 'https://youtube.com/watch?v='+video.id.videoId,
               title: video.snippet.title,
               description: video.snippet.description,
               publishedAt: video.snippet.publishedAt
