@@ -53,14 +53,6 @@ module.exports = {
       description: 'Unexpected error occurred.'
     },
 
-    rateLimitExceeded: {
-      description: 'The rate limit has been exceeded.',
-    },
-
-    invalidUrl: {
-      description: 'Unable to parse a video id from the provided YouTube URL.'
-    },
-
     success: {
       description: 'Returns an array of video metadata.',
       example: [{
@@ -101,19 +93,6 @@ module.exports = {
 
       // An unexpected error occurred.
       error: function(err) {
-
-        try {
-          var responseBody = JSON.parse(err.output.body);
-          if (err.status === 403 && _.any(responseBody.error.errors, {
-              reason: 'rateLimitExceeded'
-            })) {
-            return exits.rateLimitExceeded();
-          }
-          // Unknown youtube error
-          return exits.error(err);
-        } catch (e) {
-          return exits.error('Unexpected response from YouTube API:\n'+util.inspect(responseBody, false, null)+'\nParse error:\n'+util.inspect(e));
-        }
         return exits.error(err);
       },
 
