@@ -1,6 +1,6 @@
 {
   "name": "machinepack-youtube",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Communicate with the Youtube API to get video views, etc.",
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha -b"
